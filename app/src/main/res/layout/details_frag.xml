@@ -25,20 +25,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="300dp">
                 </androidx.viewpager.widget.ViewPager>
-
                 <TextView
                     android:id="@+id/name_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textAlignment="center"/>
-
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/detail_desc"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textAlignment="center"
                     />
                 <TextView
@@ -46,13 +43,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
-
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/detail_res"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textAlignment="center"
                     />
                 <TextView

@@ -2,11 +2,15 @@ package com.example.testapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,7 +25,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
 
+    private ShareActionProvider mShareActionProvider;
     private FragmentList fragmentList;
+    private Toolbar bar;
+
 
     private ArrayList<recipe> recipes;
     private String url = "https://test.kode-t.ru/";
@@ -64,14 +71,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onFailure(@NonNull Call<ListModel> call,@NonNull Throwable t) {
                 Toast.makeText(getApplicationContext(), "failed " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
     @Override
@@ -79,39 +83,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         parseSite();
+        bar = findViewById(R.id.toolbar);
+        bar.setTitle(R.string.app_name);
+
     }
 
-
-
-
-
-
-      /*  Call<WrapperRecipe> call = service.getRecipeWrapper();
-        call.enqueue(new Callback<WrapperRecipe>() {
-            @Override
-            public void onResponse(Call<WrapperRecipe> call, Response<WrapperRecipe> response) {
-
-                Log.d("error","Success");
-
-                if(response.isSuccessful()){
-                    Toast tst1 = Toast.makeText(getApplicationContext(),response.body().getRec().getName(),Toast.LENGTH_SHORT);
-                    tst1.show();
-                }else{
-                    switch (response.code()){
-                        case 404:
-                            Toast tst1 = Toast.makeText(getApplicationContext(),"page didnt find",Toast.LENGTH_SHORT);
-                            tst1.show();
-                        case 500:
-                            Toast tst2 = Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_SHORT);
-                            tst2.show();
-                    }
-                }
-            }
-            @Override
-            public void onFailure(Call<WrapperRecipe> call, Throwable t) {
-                Log.d("error",t.getMessage());
-            }
-        });*/
 
 
 }

@@ -37,22 +37,16 @@ public class FragmentList extends Fragment {
             @Override
             public void onItemClick(RecipeAdapter.RecipeHolder holder, int position){
                 FragmentTransaction transaction  = getActivity().getSupportFragmentManager().beginTransaction();
-
                 FragmentDetails details = new FragmentDetails();
-
-
 
                 Bundle bundle = new Bundle();
                 bundle.putInt(FragmentDetails.position,position);
-
-                String adr = holder.getAdress();
-
-                bundle.putString(FragmentDetails.adress ,adr);
+                bundle.putString(FragmentDetails.adress ,holder.getAdress());
 
                 details.setArguments(bundle);
 
                 transaction.addToBackStack(null);
-
+                transaction.setCustomAnimations(R.animator.slide_in,R.animator.slide_out,R.animator.slide_in_menu,R.animator.slide_out);
 
                 transaction.replace(R.id.container,details);
 
