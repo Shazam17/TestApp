@@ -64,9 +64,14 @@ public class FragmentDetails extends Fragment {
 
                     MainActivity activity = (MainActivity)getActivity();
 
+
+
                     name.setText(rec.getName());
                     desc.setText(rec.getDescription());
-                    insr.setText(rec.getInstructions());
+
+                    String ins = rec.getInstructions().replace("<br>","\n");
+
+                    insr.setText(ins);
 
                     adapter = new ImgePagerAdapter(getChildFragmentManager(), rec.getImages());
                     viewPager.setAdapter(adapter);
