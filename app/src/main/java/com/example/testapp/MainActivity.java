@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ShareActionProvider;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.PagerAdapter;
 
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar bar;
 
 
+
+    private String adr;
+    private final String adressOut = "ADROUT";
     private ArrayList<recipe> recipes;
     private String url = "https://test.kode-t.ru/";
 
@@ -76,6 +82,40 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "failed " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void setAdr(String adress){
+        this.adr = adr;
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        if(adr != null){
+            FragmentTransaction transaction  = getSupportFragmentManager().beginTransaction();
+            FragmentDetails details = new FragmentDetails();
+
+            Bundle bundle = new Bundle();
+            bundle.putString(FragmentDetails.adress ,adr);
+
+            details.setArguments(bundle);
+
+            transaction.addToBackStack(null);
+            transaction.setCustomAnimations(R.animator.slide_in,R.animator.slide_out,R.animator.slide_in_menu,R.animator.slide_out);
+
+            transaction.replace(R.id.container,details);
+
+            transaction.commit();
+        }else{
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container,fragmentList);
+            transaction.addToBackStack(null);
+
+            transaction.commit();
+        }
+
     }
 
     @Override

@@ -34,6 +34,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
         TextView desc;
         ImageView img;
         String adress;
+
         public RecipeHolder(View v){
             super(v);
             name = v.findViewById(R.id.name_item);
@@ -54,12 +55,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
     @NonNull
     @Override
     public RecipeAdapter.RecipeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-       View v = LayoutInflater.from(parent.getContext())
-               .inflate(R.layout.recipe_item, parent, false);
-
-
-       return new RecipeHolder(v);
+        return new RecipeHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.recipe_item, parent, false));
     }
 
     @Override
@@ -75,14 +72,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
                 holder.desc.setText(desc);
             }
 
+            try {
+                Glide
+                        .with(context)
+                        .load(recipes.get(position).getImages().get(0))
+                        .into(holder.img);
+            }catch (NullPointerException ex){
 
+            }
 
-
-
-        Glide
-                .with(context)
-                .load(recipes.get(position).getImages().get(0))
-                .into(holder.img);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
